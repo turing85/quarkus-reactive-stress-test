@@ -4,6 +4,10 @@ services:
   postgres:
     container_name: postgres
     image: postgres:15.2-alpine3.17
+    deploy:
+      resources:
+        limits:
+          cpus: 4.0
     volumes:
       - ${REMOTE_PROJECT_PATH:-.}/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/:ro
     environment:
@@ -15,6 +19,8 @@ services:
       - "5432:5432"
     networks:
       - default
+    tmpfs:
+      - /var/lib/postgresql/data
 networks:
   default:
     driver: bridge

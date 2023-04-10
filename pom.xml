@@ -24,6 +24,9 @@
     <flyway-maven-plugin.version>9.8.1</flyway-maven-plugin.version>
     <jmeter-maven-plugin.version>3.7.0</jmeter-maven-plugin.version>
 
+    <jmeter-graph-maven-plugin.version>0.1.0</jmeter-graph-maven-plugin.version>
+    <jmeter.threads>4</jmeter.threads>
+    <jmeter.requests-per-thread>100000</jmeter.requests-per-thread>
   </properties>
 
   <build>
@@ -54,6 +57,9 @@
             <goals>
               <goal>jmeter</goal>
             </goals>
+            <configuration>
+              <generateReports>true</generateReports>
+            </configuration>
           </execution>
           <execution>
             <id>jmeter-check-results</id>
@@ -62,6 +68,14 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <generateReports>true</generateReports>
+          <propertiesUser>
+            <http-users>${jmeter.threads}</http-users>
+            <requests-per-http-user>${jmeter.requests-per-thread}</requests-per-http-user>
+            <jmeter.reportgenerator.overall_granularity>1000</jmeter.reportgenerator.overall_granularity>
+          </propertiesUser>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
