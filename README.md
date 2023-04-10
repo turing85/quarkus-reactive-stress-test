@@ -1,29 +1,23 @@
 # quarkus-reactive-stress-test
 
 ## Run the tests
-- Build the application:
-  ```bash
-  ./mvnw clean package
-  ```
-- Start the database service:
-  ```bash
-  docker compose --file local-deployment/docker-compose.yml up -d
-  ```
-- Create Database schema:
-  ```bash
-  ./mvnw flyway:migrate
-  ```
-- Start the application:
-  ```bash
-  java -jar target/quarkus-app/quarkus-run.jar
-  ```
-- Start JMeter tests:
-  
-  In a different terminal, run:
-  ```
-  ./mvnw jmeter:jmeter
-  ```
-  Test execution takes a moment (1-2 minutes).
+```bash
+# Build the application:
+./mvnw clean package
+# Start the database service:
+docker-compose --file local-deployment/docker-compose.yml down
+docker-compose --file local-deployment/docker-compose.yml up -d
+# Create Database schema:
+./mvnw flyway:migrate
+# Start the application:
+java -jar target/quarkus-app/quarkus-run.jar
+```
+In a different terminal, run:
+```bash
+# Start JMeter tests:
+./mvnw jmeter:jmeter
+```
+Test execution takes a moment (1-2 minutes).
 
 ## Results
 During test execution, we are able to observe `Exception`s in the application log:
