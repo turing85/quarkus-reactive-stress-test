@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-cd "$( dirname -- "${BASH_SOURCE[0]}" )" 1> /dev/null
+cd "$( dirname "${BASH_SOURCE[0]}" )" 1> /dev/null
+cd lua-scripts
 wrk \
   --threads "${1:-1}" \
   --connections "${2:-4}" \
