@@ -9,32 +9,36 @@ Animal = {
 
 local charset = "abcdefghijklmnopqrstuvwxyz"
 
-function randomString(length)
-    if length > 0 then
-        local index = math.random(1, #charset)
-        return randomString(length - 1) .. charset:sub(index, index)
-    else
-        return ""
+function string.random(length)
+    local result = ""
+    if length <= 0 then
+        return result
     end
+    for _ = 1, length, 1 do
+        local index = math.random(1, charset:len())
+        result = result .. charset:sub(index, index)
+    end
+    return result;
 end
 
 function Animal:new()
-    o = {
-        name = randomString(5);
-        species = randomString(5)
+    local animal = {
+        name = string.random(5);
+        species = string.random(5)
     }   -- create object if user does not provide one
-    setmetatable(o, self)
+    setmetatable(animal, self)
     self.__index = self
-    return o
+    return animal
 end
 
 function Animal:json()
     return json.encode(self);
 end
 
+local url_path = "/animals"
+local headers = { ["Content-Type"] = "application/json;charset=UTF-8" }
+
 request = function()
-    url_path = "/animals"
-    local headers = { ["Content-Type"] = "application/json;charset=UTF-8" }
    return wrk.format("POST", url_path, headers, Animal:new():json())
 end
 

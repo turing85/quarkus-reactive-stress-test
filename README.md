@@ -136,3 +136,18 @@ cat target/jmeter/logs/http.jmx.log
 ..
 2023-04-10 09:44:14,921 INFO o.a.j.r.Summariser: summary =  80000 in 00:00:56 = 1427.2/s Avg:     5 Min:     0 Max:   551 Err:  2650 (3.31%)
 ```
+
+## Run `wrk` test
+```bash
+wrk/run.sh <thread> <connections> <duration>
+```
+So:
+```bash
+wrk/run.sh 1 8 1m
+```
+would run with 1 thread and 8 connections for 1 minute. 
+
+The arguments are optional. If they are not given, they are equivalent to
+```bash
+wrk/run.sh 1 4 30s
+```
