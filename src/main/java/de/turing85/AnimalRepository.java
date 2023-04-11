@@ -1,7 +1,7 @@
 package de.turing85;
 
 import io.quarkus.hibernate.reactive.panache.PanacheRepository;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
