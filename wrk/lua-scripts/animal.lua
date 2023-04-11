@@ -15,8 +15,8 @@ Animal.__tostring = Animal.json;
 function Animal:new(that)
     that = that or {};
     local animal = {
-        name = that.name or string_utils.random(5);
-        species = that.species or string_utils.random(5)
+        name = that.name or string_utils.random(10);
+        species = that.species or string_utils.random(10)
     }
     setmetatable(animal, self)
     self.__index = self

@@ -1,5 +1,27 @@
 version: '3.7'
 services:
+  animal-service:
+    container_name: animal-service
+    build:
+      context: ../
+      dockerfile: src/main/docker/Containerfile.temurin
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 128M
+        reservations:
+          cpus: 1
+          memory: 128M
+    env_file:
+      - animal-service/.env
+    environment:
+      QUARKUS_VERTX_EVENT_LOOPS_POOL_SIZE: 1
+    ports:
+      - '8080:8080'
+      - '9999:9999'
+    networks:
+      - default
   # postgres + pgadmin4 web UI
   postgres:
     container_name: postgres

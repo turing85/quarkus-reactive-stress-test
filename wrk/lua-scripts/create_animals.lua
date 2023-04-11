@@ -19,6 +19,10 @@ done = function(summary, latency, _)
             status_symbol))
     io.write("--------------- Latency ----------------\n")
     io.write(string.format(
+            "      mean : %7d µs = %8.3f ms\n",
+            latency.mean,
+            latency.mean / microseconds_per_millisecond))
+    io.write(string.format(
             "     stdev : %7d µs = %8.3f ms\n",
             latency.stdev,
             latency.stdev / microseconds_per_millisecond))

@@ -1,0 +1,14 @@
+FROM quay.io/quarkus/quarkus-micro-image:2.0
+ARG APP_DIR=/application
+ARG UID=1001
+
+WORKDIR ${APP_DIR}
+COPY \
+  --chmod=711 \
+   target/*-runner ${APP_DIR}/application
+
+USER ${UID}:${UID}
+ENTRYPOINT [ \
+  "./application", \
+  "-Dquarkus.http.host=0.0.0.0" \
+]
