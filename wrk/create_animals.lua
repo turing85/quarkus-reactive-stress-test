@@ -42,10 +42,13 @@ request = function()
    return wrk.format("POST", url_path, headers, Animal:new():json())
 end
 
-done = function(summary, latency, requests)
+done = function(summary, latency, _)
     io.write("-------------- CREATE ANIMALS -----------------\n")
     io.write(string.format("total number of requests: %d\n", summary.requests));
-    io.write(string.format("Non-2xx percentage: %.2f%%\n", summary.errors.status / summary.requests * 100))
+    io.write(string.format(
+            "Non-2xx responses: %d (%.2f%%)\n",
+            summary.errors.status,
+            summary.errors.status / summary.requests * 100))
     io.write("-------------- Latency ------------------------\n")
     io.write(string.format("stdev: %f\n", latency.stdev))
     io.write(string.format("min: %d\n", latency.min))
