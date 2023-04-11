@@ -26,7 +26,7 @@
 
     <jmeter-graph-maven-plugin.version>0.1.0</jmeter-graph-maven-plugin.version>
     <jmeter.threads>4</jmeter.threads>
-    <jmeter.requests-per-thread>100000</jmeter.requests-per-thread>
+    <jmeter.requests-per-thread>10000</jmeter.requests-per-thread>
   </properties>
 
   <build>
