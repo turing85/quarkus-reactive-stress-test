@@ -9,10 +9,10 @@ services:
       resources:
         limits:
           cpus: 1
-          memory: 128M
+          memory: 100M
         reservations:
           cpus: 1
-          memory: 128M
+          memory: 100M
     env_file:
       - animal-service/.env
     environment:
@@ -41,8 +41,26 @@ services:
       - "5432:5432"
     networks:
       - default
+      - database
     tmpfs:
       - /var/lib/postgresql/data
+  # pgadmin4 web UI - to interact with the postgres databases
+  pgadmin4:
+    profiles:
+      - develop
+    image: dpage/pgadmin4:6.21
+    volumes:
+      - ${REMOTE_LOCALDEPLOYMENT_DIR:-.}/pgadmin4/pgadmin4/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      - postgres
+    ports:
+      - "60080:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    networks:
+      - database
 networks:
   default:
     driver: bridge
+  database:
