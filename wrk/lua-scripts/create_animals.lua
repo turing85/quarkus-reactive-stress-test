@@ -3,7 +3,7 @@ local Animal = require("animal")
 local headers = { ["Content-Type"] = "application/json;charset=UTF-8" }
 
 request = function()
-   return wrk.format("POST", "/animal", headers, Animal:new():json())
+   return wrk.format("POST", "/animals", headers, Animal:new():json())
 end
 
 local microseconds_per_millisecond = 1000.0;
