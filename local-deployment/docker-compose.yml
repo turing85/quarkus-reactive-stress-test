@@ -15,8 +15,6 @@ services:
           memory: 128M
     env_file:
       - animal-service/.env
-    environment:
-      QUARKUS_VERTX_EVENT_LOOPS_POOL_SIZE: 1
     ports:
       - '8080:8080'
       - '9999:9999'

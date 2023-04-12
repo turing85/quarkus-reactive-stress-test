@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "animals")
+@Table(name = "animals", schema = "public")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,14 +21,15 @@ public class Animal extends PanacheEntityBase {
   @Id
   @SequenceGenerator(
       name = "animalSequenceGenerator",
+      schema = "public",
       sequenceName = "animals__seq__id")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animalSequenceGenerator")
   @Column(name = "id")
   Long id;
 
-  @Column(name = "name", unique = true)
+  @Column(name = "name", length = 63, nullable = false, unique = true)
   String name = "";
 
-  @Column(name = "species")
+  @Column(name = "species", length = 63, nullable = false)
   String species = "";
 }
