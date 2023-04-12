@@ -1,0 +1,11 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: ${DB_USER:animals}
+    password: ${DB_PASSWORD:animals}
+    reactive:
+      url: vertx-reactive:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:animals}
+      max-size: 8
+db:
+  cleanup:
+    cron: 0 * * * * ?
