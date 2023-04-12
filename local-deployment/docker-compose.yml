@@ -64,3 +64,4 @@ networks:
   default:
     driver: bridge
   database:
+    driver: bridge
