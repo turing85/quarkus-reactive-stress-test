@@ -17,7 +17,6 @@ COPY --chmod=755 target/quarkus-app/app/ ${APP_DIR}/app
 COPY --chmod=755 target/quarkus-app/quarkus/ ${APP_DIR}/quarkus
 
 USER ${UID}:${UID}
-ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENTRYPOINT [ \
   "java", \
   "-jar", \
