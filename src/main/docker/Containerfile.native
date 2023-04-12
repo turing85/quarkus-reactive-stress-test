@@ -4,11 +4,8 @@ ARG UID=1001
 
 WORKDIR ${APP_DIR}
 COPY \
-  --chmod=711 \
+  --chmod=111 \
    target/*-runner ${APP_DIR}/application
 
 USER ${UID}:${UID}
-ENTRYPOINT [ \
-  "./application", \
-  "-Dquarkus.http.host=0.0.0.0" \
-]
+ENTRYPOINT [ "./application" ]

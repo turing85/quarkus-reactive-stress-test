@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 services:
   animal-service:
     container_name: animal-service
@@ -16,8 +16,8 @@ services:
     env_file:
       - animal-service/.env
     ports:
-      - '8080:8080'
-      - '9999:9999'
+      - "8080:8080"
+      - "9999:9999"
     networks:
       - default
   # postgres + pgadmin4 web UI
@@ -48,7 +48,7 @@ services:
       - develop
     image: dpage/pgadmin4:6.21
     volumes:
-      - ${REMOTE_LOCALDEPLOYMENT_DIR:-.}/pgadmin4/pgadmin4/servers.json:/pgadmin4/servers.json:ro
+      - ${REMOTE_PROJECT_PATH:-.}/pgadmin4/pgadmin4/servers.json:/pgadmin4/servers.json:ro
     depends_on:
       - postgres
     ports:
