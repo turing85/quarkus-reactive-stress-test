@@ -6,7 +6,7 @@
 ./mvnw clean package
 # Start the database service:
 docker-compose --file local-deployment/docker-compose.yml down
-docker-compose --file local-deployment/docker-compose.yml up -d
+docker-compose --file local-deployment/docker-compose.yml up -d postgres
 # Create Database schema:
 ./mvnw flyway:migrate
 # Start the application:
