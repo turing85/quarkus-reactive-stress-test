@@ -9,10 +9,10 @@ services:
       resources:
         limits:
           cpus: 1
-          memory: 100M
+          memory: 128M
         reservations:
           cpus: 1
-          memory: 100M
+          memory: 128M
     env_file:
       - animal-service/.env
     environment:
