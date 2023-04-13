@@ -1,23 +1,105 @@
 version: "3.7"
 services:
-  animal-service:
+  animal-service-temurin:
     container_name: animal-service
+    profiles:
+      - temurin
+    image: animal-service:temurin
     build:
       context: ../
-      dockerfile: src/main/docker/Containerfile.temurin
+      dockerfile: containerfiles/Containerfile.temurin
+      tags:
+        - animal-service:latest
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: "1"
           memory: 128M
         reservations:
-          cpus: 1
+          cpus: "1"
           memory: 128M
     env_file:
-      - animal-service/.env
+      - animal-service/common.env
+      - animal-service/jvm.env
     ports:
       - "8080:8080"
       - "9999:9999"
+    networks:
+      - default
+  animal-service-ubi:
+    container_name: animal-service
+    profiles:
+      - ubi
+    image: animal-service:ubi
+    build:
+      context: ../
+      dockerfile: containerfiles/Containerfile.ubi
+      tags:
+        - animal-service:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 128M
+        reservations:
+          cpus: "1"
+          memory: 128M
+    env_file:
+      - animal-service/common.env
+      - animal-service/jvm.env
+    ports:
+      - "8080:8080"
+      - "9999:9999"
+    networks:
+      - default
+  animal-service-distroless:
+    container_name: animal-service
+    profiles:
+      - distroless
+    image: animal-service:distroless
+    build:
+      context: ../
+      dockerfile: containerfiles/Containerfile.distroless
+      tags:
+        - animal-service:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 128M
+        reservations:
+          cpus: "1"
+          memory: 128M
+    env_file:
+      - animal-service/common.env
+      - animal-service/jvm.env
+    ports:
+      - "8080:8080"
+      - "9999:9999"
+    networks:
+      - default
+  animal-service-native:
+    container_name: animal-service
+    profiles:
+      - native
+    image: animal-service:native
+    build:
+      context: ../
+      dockerfile: containerfiles/Containerfile.native
+      tags:
+        - animal-service:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 30M
+        reservations:
+          cpus: "1"
+          memory: 30M
+    env_file:
+      - animal-service/common.env
+    ports:
+      - "8080:8080"
     networks:
       - default
   # postgres + pgadmin4 web UI
@@ -27,7 +109,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 4.0
+          cpus: "4.0"
     volumes:
       - ${REMOTE_PROJECT_PATH:-.}/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/:ro
     environment:
@@ -44,6 +126,7 @@ services:
       - /var/lib/postgresql/data
   # pgadmin4 web UI - to interact with the postgres databases
   pgadmin4:
+    container_name: pgadmin4
     profiles:
       - develop
     image: dpage/pgadmin4:6.21
