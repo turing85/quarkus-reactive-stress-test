@@ -22,6 +22,7 @@ services:
       - animal-service/common.env
       - animal-service/jvm.env
     ports:
+      - "5005:5005"
       - "8080:8080"
       - "9999:9999"
     networks:
@@ -48,6 +49,7 @@ services:
       - animal-service/common.env
       - animal-service/jvm.env
     ports:
+      - "5005:5005"
       - "8080:8080"
       - "9999:9999"
     networks:
@@ -74,6 +76,7 @@ services:
       - animal-service/common.env
       - animal-service/jvm.env
     ports:
+      - "5005:5005"
       - "8080:8080"
       - "9999:9999"
     networks:
@@ -92,16 +95,17 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 30M
+          memory: 35M
         reservations:
           cpus: "1"
-          memory: 30M
+          memory: 35M
     env_file:
       - animal-service/common.env
     ports:
       - "8080:8080"
     networks:
       - default
+
   # postgres + pgadmin4 web UI
   postgres:
     container_name: postgres
@@ -141,6 +145,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4
     networks:
       - database
+
 networks:
   default:
     driver: bridge
